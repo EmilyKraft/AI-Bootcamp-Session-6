@@ -5,6 +5,16 @@
 **Status**: Draft  
 **Input**: User description: "Support for Overdue Todo Items - Users need a clear, visual way to identify which todos have not been completed by their due date"
 
+## Clarifications
+
+### Session 2025-11-13
+
+- Q: What visual styling approach should be used for overdue todos? → A: Both color and icon - Combine red/warning color with icon for maximum clarity and accessibility
+- Q: If the real-time update mechanism fails, how should the system recover? → A: Update on next user interaction - Recalculate on any click/keypress/focus
+- Q: When does a todo become overdue - at end of due date or at a specific time? → A: End of due date (11:59:59 PM)
+- Q: How should the system handle overdue calculations with 500+ todos? → A: Calculate on render - Recalculate for visible items on each render cycle
+- Q: Should the system include logging/debugging for overdue calculations? → A: Console warnings for edge cases - Log only when unexpected conditions occur
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Visual Identification of Overdue Todos (Priority: P1)
@@ -45,15 +55,16 @@ A user who has the todo list open sees todos automatically update to overdue sty
 - What happens when a todo has no due date set? (Should not display as overdue)
 - What happens when the user's system clock is incorrect? (System uses client-side date/time)
 - What happens when a user completes an overdue todo? (Overdue styling should be removed immediately)
-- What happens with todos due at exactly midnight? (Should become overdue at 12:00:01 AM the next day)
+- What happens with todos due at exactly midnight? (A todo due on any date becomes overdue at 12:00:00 AM the next day - after 11:59:59 PM of the due date)
 - What happens when viewing todos across different time zones? (Uses local time zone of the user's device)
+- What happens if the real-time update timer fails or browser tab becomes inactive? (System recalculates overdue status on next user interaction - any click, keypress, or focus event)
 
 ## Requirements *(mandatory)*
 
 ### Functional Requirements
 
-- **FR-001**: System MUST identify todos as overdue when the current date/time is after the todo's due date AND the todo is marked as incomplete
-- **FR-002**: System MUST apply distinct visual styling to overdue todos that differentiates them from non-overdue todos (using color, icons, or both per UI guidelines)
+- **FR-001**: System MUST identify todos as overdue when the current date/time is after the end of the due date (11:59:59 PM on the due date) AND the todo is marked as incomplete
+- **FR-002**: System MUST apply distinct visual styling to overdue todos using BOTH color (red/warning tones) AND an icon (warning/alert symbol) to ensure accessibility and visual prominence
 - **FR-003**: System MUST NOT mark completed todos as overdue, regardless of their due date
 - **FR-004**: System MUST NOT mark todos without a due date as overdue
 - **FR-005**: System MUST use the client's local date/time to determine overdue status
@@ -61,6 +72,8 @@ A user who has the todo list open sees todos automatically update to overdue sty
 - **FR-007**: System MUST update overdue status dynamically when a user changes a todo's due date
 - **FR-008**: Overdue visual indicators MUST be consistent across all todo items in the list
 - **FR-009**: Overdue visual styling MUST meet accessibility standards (sufficient color contrast, not relying solely on color)
+- **FR-010**: System MUST calculate overdue status efficiently on each render cycle using optimized date comparison operations to meet SC-003 performance target
+- **FR-011**: System MUST log console warnings when unexpected conditions occur during overdue calculation (e.g., invalid date formats, calculation errors)
 
 ### Key Entities
 
