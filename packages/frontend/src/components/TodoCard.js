@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { isOverdue } from '../utils/dateUtils';
 
 function TodoCard({ todo, onToggle, onEdit, onDelete, isLoading }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -50,7 +51,7 @@ function TodoCard({ todo, onToggle, onEdit, onDelete, isLoading }) {
     if (window.confirm('Are you sure you want to delete this todo? This action cannot be undone.')) {
       onDelete(todo.id);
     }
-  };
+  }
 
   const formatDate = (dateString) => {
     if (!dateString) return null;
@@ -61,6 +62,8 @@ function TodoCard({ todo, onToggle, onEdit, onDelete, isLoading }) {
       day: 'numeric',
     });
   };
+
+  const todoIsOverdue = isOverdue(todo);
 
   if (isEditing) {
     return (
@@ -107,7 +110,18 @@ function TodoCard({ todo, onToggle, onEdit, onDelete, isLoading }) {
   }
 
   return (
-    <div className={`todo-card ${todo.completed ? 'completed' : ''}`}>
+    <div
+      className={`todo-card ${todo.completed ? 'completed' : ''} ${
+        todoIsOverdue ? 'overdue' : ''
+      }`}
+    >
+      {todoIsOverdue && (
+        <span
+          className="overdue-icon"
+          aria-label="Overdue"
+          title="This todo is overdue"
+        ></span>
+      )}
       <input
         type="checkbox"
         checked={todo.completed === 1}

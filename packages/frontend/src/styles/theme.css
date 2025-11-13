@@ -15,6 +15,8 @@
   --border-color: #e0e0e0;
   --success-color: #2e7d32;
   --danger-color: #c62828;
+  --warning-color: #d32f2f;
+  --warning-bg: #ffebee;
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
@@ -47,7 +49,36 @@
   --border-color: #404040;
   --success-color: #66bb6a;
   --danger-color: #ef5350;
+  --warning-color: #ef5350;
+  --warning-bg: #4a2020;
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Overdue Todo Styling */
+.todo-card.overdue {
+  border-left: 4px solid var(--warning-color);
+  background-color: var(--warning-bg);
+}
+
+.todo-card.overdue .todo-title {
+  color: var(--warning-color);
+  font-weight: 600;
+}
+
+.overdue-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin-right: var(--space-xs);
+  color: var(--warning-color);
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.overdue-icon::before {
+  content: "⚠";
 }
