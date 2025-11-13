@@ -100,6 +100,20 @@
 - **[Entity 1]**: [What it represents, key attributes without implementation]
 - **[Entity 2]**: [What it represents, relationships to other entities]
 
+### Out of Scope *(mandatory)*
+
+<!--
+  ACTION REQUIRED: Explicitly define what is NOT included in this feature.
+  Per Constitution Principle IV (Simplicity & Scope Control), scope boundaries must be clear.
+-->
+
+The following items are explicitly OUT OF SCOPE for this feature:
+
+- [Item 1 that will NOT be implemented]
+- [Item 2 that will NOT be implemented]
+- [Item 3 that might be considered in future iterations]
+- [Advanced feature that adds complexity without core value]
+
 ## Success Criteria *(mandatory)*
 
 <!--

@@ -31,7 +31,16 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+Verify compliance with [Constitution](../.specify/memory/constitution.md):
+
+- [ ] **Documentation-First**: Feature spec written and approved before planning?
+- [ ] **Test-Driven Development**: Testing strategy defined (unit/integration)?
+- [ ] **Code Quality**: Linting rules and formatting standards identified?
+- [ ] **Simplicity & Scope**: "Out of Scope" explicitly defined?
+- [ ] **User-Centric**: User scenarios with acceptance criteria documented?
+- [ ] **Architecture**: Frontend/Backend separation maintained per monorepo structure?
+
+*All checks must pass to proceed with implementation.*
 
 ## Project Structure
 
